@@ -10,9 +10,11 @@ const rootTypeDefs = gql`
     type Query {
         doctors(input: FilterDoctorsInput): [Doctor!]
         singleDoctor(doctorName: String): Doctor!
+        singlePatient(patientId: Int): Patient!
         patientsOfDoctor(doctorId: Int): [Patient!]
         patientsOfHospital(hospitalId: Int): [Patient!]
         symptomsOfPatient(patientId: Int): [Symptom!]
+        hospitals: [Hospital!]
     }
 
     type Mutation {
@@ -29,14 +31,20 @@ const rootResolvers = {
         patientsOfDoctor: (obj, {doctorId}, {pgPool}) => {
             return queries.getPatientsOfDoctor(pgPool, doctorId);
         },
+        singlePatient: (obj, {patientId}, {pgPool}) => {
+            return queries.getSinglePatient(pgPool, patientId);
+        },
         singleDoctor: (obj, {doctorName}, {pgPool}) => {
-            return queries.getSingleDoctor(pgPool, doctorName)
+            return queries.getSingleDoctor(pgPool, doctorName);
         },
         patientsOfHospital: (obj, {hospitalId}, {pgPool}) => {
             return queries.getPatientsOfHospital(pgPool, hospitalId);
         },
         symptomsOfPatient: (obj, {patientId}, {pgPool}) => {
             return queries.getSymptomsOfPatient(pgPool, patientId);
+        },
+        hospitals: (obj, args, {pgPool}) => {
+            return queries.getAllHospitals(pgPool);
         }
     },
 
