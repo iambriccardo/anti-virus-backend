@@ -13,6 +13,11 @@ const rootTypeDefs = gql`
         patientsOfHospital(hospitalId: Int): [Patient!]
         symptomsOfPatient(patientId: Int): [Symptom!]
     }
+
+    type Mutation {
+        movePatientToHospital(patientId: Int, hospitalId: Int): Patient!
+        movePatientToDoctor(patientId: Int, hospitalId: Int): Patient!
+    }
 `;
 
 const rootResolvers = {
@@ -28,6 +33,16 @@ const rootResolvers = {
         },
         symptomsOfPatient: (obj, {patientId}, {pgPool}) => {
             return queries.getSymptomsOfPatient(pgPool, patientId);
+        }
+    },
+
+    Mutation: {
+        movePatientToHospital: (obj, {patientId, hospitalId}, {pgPool}) => {
+            //console.log(hospitalId)
+            return queries.movePatientToHospital(pgPool, patientId, hospitalId)
+        },
+        movePatientToDoctor: (obj, {patientId, hospitalId}, {pgPool}) => {
+            return queries.movePatientToDoctor(pgPool, patientId, hospitalId)
         }
     }
 };
