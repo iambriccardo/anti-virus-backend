@@ -9,8 +9,8 @@ module.exports = {
             officeLat: Float!
             officeLon: Float!
         }
-        
-        input FilterDoctorInput {
+
+        input FilterDoctorsInput {
             name: String
             surname: String
         }

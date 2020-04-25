@@ -13,10 +13,6 @@ module.exports = {
             soarThroat: Boolean!
             diarrhoea: Boolean!
         }
-        
-        input FilterSymptomsInput {
-            patientId: Int
-        }
     `,
     resolvers: {
 
