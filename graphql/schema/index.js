@@ -9,6 +9,7 @@ const symptom = require('./symptom')
 const rootTypeDefs = gql`
     type Query {
         doctors(input: FilterDoctorsInput): [Doctor!]
+        singleDoctor(doctorName: String): Doctor!
         patientsOfDoctor(doctorId: Int): [Patient!]
         patientsOfHospital(hospitalId: Int): [Patient!]
         symptomsOfPatient(patientId: Int): [Symptom!]
@@ -27,6 +28,9 @@ const rootResolvers = {
         },
         patientsOfDoctor: (obj, {doctorId}, {pgPool}) => {
             return queries.getPatientsOfDoctor(pgPool, doctorId);
+        },
+        singleDoctor: (obj, {doctorName}, {pgPool}) => {
+            return queries.getSingleDoctor(pgPool, doctorName)
         },
         patientsOfHospital: (obj, {hospitalId}, {pgPool}) => {
             return queries.getPatientsOfHospital(pgPool, hospitalId);
