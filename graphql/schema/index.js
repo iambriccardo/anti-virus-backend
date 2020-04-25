@@ -16,7 +16,7 @@ const rootTypeDefs = gql`
 
     type Mutation {
         movePatientToHospital(patientId: Int, hospitalId: Int): Patient!
-        movePatientToDoctor(patientId: Int, hospitalId: Int): Patient!
+        movePatientToDoctor(patientId: Int, doctorId: Int): Patient!
     }
 `;
 
@@ -37,12 +37,11 @@ const rootResolvers = {
     },
 
     Mutation: {
-        movePatientToHospital: (obj, {patientId, hospitalId}, {pgPool}) => {
-            //console.log(hospitalId)
-            return queries.movePatientToHospital(pgPool, patientId, hospitalId)
+        movePatientToHospital: async (obj, {patientId, hospitalId}, {pgPool}) => {
+            return  queries.movePatientToHospital(pgPool, patientId, hospitalId);
         },
-        movePatientToDoctor: (obj, {patientId, hospitalId}, {pgPool}) => {
-            return queries.movePatientToDoctor(pgPool, patientId, hospitalId)
+        movePatientToDoctor: (obj, {patientId, doctorId}, {pgPool}) => {
+            return queries.movePatientToDoctor(pgPool, patientId, doctorId);
         }
     }
 };
