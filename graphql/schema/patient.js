@@ -1,4 +1,5 @@
 const {gql} = require('apollo-server-express');
+const {getImageUrl} = require('../../util/image')
 
 module.exports = {
     typeDefs: gql`
@@ -11,9 +12,13 @@ module.exports = {
             familyMembers: Int!
             homeLat: Float!
             homeLon: Float!
+            imageUrl: String!
         }
     `,
     resolvers: {
+        Patient: {
+            imageUrl: () => getImageUrl()
+        }
 
     }
 }
