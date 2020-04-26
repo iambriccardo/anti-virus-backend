@@ -5,7 +5,7 @@ module.exports = {
         type Symptom {
             id: Int!
             registrationDate: String!
-            bodyTemperature: Int!
+            bodyTemperature: Float!
             tiredness: Int!
             cough: Int!
             pain: Int!

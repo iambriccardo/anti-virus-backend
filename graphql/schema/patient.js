@@ -13,6 +13,7 @@ module.exports = {
             homeLat: Float!
             homeLon: Float!
             imageUrl: String!
+            risk_factor: String!
         }
     `,
     resolvers: {
