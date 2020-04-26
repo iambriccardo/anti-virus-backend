@@ -20,7 +20,7 @@ module.exports = {
         return first(pgPool.query('SELECT * FROM patient WHERE id = $1', [patientId]))
     },
     getSymptomsOfPatient: (pgPool, patientId) => {
-        return all(pgPool.query('SELECT * FROM symptoms WHERE patient_fk = $1', [patientId]))
+        return all(pgPool.query('SELECT * FROM symptom WHERE patient_fk = $1', [patientId]))
     },
     movePatientToHospital: (pgPool, patientId, hospitalId) => {
         return first(pgPool.query('UPDATE patient SET doctor_fk = null, hospital_fk = $1 WHERE id = $2 RETURNING *', [hospitalId, patientId]))
