@@ -7,6 +7,9 @@ module.exports = {
     getSingleDoctor: (pgPool, doctorName) => {
         return first(pgPool.query('SELECT * FROM doctor WHERE name = $1', [doctorName]))
     },
+    getSingleHospital: (pgPool, hospitalName) => {
+        return first(pgPool.query('SELECT * FROM hospital WHERE name = $1', [hospitalName]))
+    },
     getPatientsOfDoctor: (pgPool, doctorId) => {
         return all(pgPool.query('SELECT * FROM patient WHERE doctor_fk = $1 ORDER BY name, name', [doctorId]))
     },
@@ -17,7 +20,7 @@ module.exports = {
         return first(pgPool.query('SELECT * FROM patient WHERE id = $1', [patientId]))
     },
     getSymptomsOfPatient: (pgPool, patientId) => {
-        return all(pgPool.query('SELECT * FROM symptoms WHERE patient_fk = $1', [patientId]))
+        return all(pgPool.query('SELECT * FROM symptom WHERE patient_fk = $1', [patientId]))
     },
     movePatientToHospital: (pgPool, patientId, hospitalId) => {
         return first(pgPool.query('UPDATE patient SET doctor_fk = null, hospital_fk = $1 WHERE id = $2 RETURNING *', [hospitalId, patientId]))
