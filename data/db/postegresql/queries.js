@@ -7,6 +7,9 @@ module.exports = {
     getSingleDoctor: (pgPool, doctorName) => {
         return first(pgPool.query('SELECT * FROM doctor WHERE name = $1', [doctorName]))
     },
+    getSingleHospital: (pgPool, hospitalName) => {
+        return first(pgPool.query('SELECT * FROM hospital WHERE name = $1', [hospitalName]))
+    },
     getPatientsOfDoctor: (pgPool, doctorId) => {
         return all(pgPool.query('SELECT * FROM patient WHERE doctor_fk = $1 ORDER BY name, name', [doctorId]))
     },
