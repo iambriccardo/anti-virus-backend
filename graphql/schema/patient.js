@@ -12,6 +12,7 @@ module.exports = {
             familyMembers: Int!
             homeLat: Float!
             homeLon: Float!
+            riskScore: String
             imageUrl: String!
         }
     `,
